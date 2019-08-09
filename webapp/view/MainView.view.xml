@@ -1,0 +1,78 @@
+<mvc:View controllerName="com.myorg.ajax.controller.MainView" displayBlock="true" 
+	xmlns="sap.m" 
+	xmlns:mvc="sap.ui.core.mvc">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{i18n>Users}">
+				<content>
+					<Table
+				id="table"
+				width="auto"
+				items="{
+					path: '/data',
+					sorter: {
+						path: 'id',
+						descending: false
+					}
+				}"
+				noDataText="{worklistView>/tableNoDataText}"
+				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+				growing="true"
+				growingScrollToLoad="true"
+				updateFinished=".onUpdateFinished">
+
+				<headerToolbar>
+					<OverflowToolbar>
+						<Title
+							id="tableHeader"
+							text="{worklistView>/worklistTableTitle}"
+							level="H3"/>
+						<ToolbarSpacer />
+						<SearchField
+							id="searchField"
+							tooltip="{i18n>worklistSearchTooltip}"
+							search=".onSearch">
+							<layoutData>
+								<OverflowToolbarLayoutData
+									maxWidth="200px"
+									priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+					</OverflowToolbar>
+				</headerToolbar>
+
+				<columns>
+					<Column id="nameColumn">
+						<Text text="{i18n>id}" id="idColumn"/>
+					</Column>
+					<Column id="emailColumn" demandPopin="false" minScreenWidth="Tablet">
+						<Text text="{i18n>email}"/>
+					</Column>
+					<Column id="firstNameColumn">
+						<Text text="{i18n>first name}" id="firstName"/>
+					</Column>
+					<Column id="lastNameColumn" hAlign="End">
+						<Text text="{i18n>last name}" id="lastName"/>
+					</Column>
+				</columns>
+
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						>
+						<cells>
+							<ObjectIdentifier
+								title="{id}"/>
+							<Text text = "{email}"/>
+							<Text text = "{first_name}"/>
+							<Text text = "{last_name}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+				</content>
+
+			</Page>
+		</pages>
+	</App>
+</mvc:View> 
