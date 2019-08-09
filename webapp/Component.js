@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"com/myorg/ajax/model/models"
-], function(UIComponent, Device, models) {
+	"com/myorg/ajax/model/models",
+	"sap/ui/model/json/JSONModel"
+], function(UIComponent, Device, models, JSONModel) {
 	"use strict";
 
 	return UIComponent.extend("com.myorg.ajax.Component", {
@@ -25,6 +26,21 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
+
+			var oModel = new JSONModel();
+			this.setModel(oModel);
+
+      var url = 'http://localhost:8081/https://reqres.in/api/users/';
+      
+      $.ajax({
+        url: url,
+        type: "GET",
+        contentType: "application/json",
+        dataType: 'json',
+        success: function(data, textStatus, jqXHR) {
+          oModel.setData(data);
+        }
+      });
 		}
 	});
 });
